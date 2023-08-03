@@ -1,0 +1,142 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Project/Maven2/JavaApp/src/main/java/${packagePath}/${mainClassName}.java to edit this template
+ */
+
+package com.mycompany.proyectoprogra;
+import java.time.LocalTime;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import javax.swing.JOptionPane;
+/**
+ *
+ * @author andre
+ */
+public class ProyectoProgra {
+
+    public static void main(String[] args) {
+        Medicos arrMedicos[] = new Medicos[5];
+        
+        String message= """
+                    Bienvenido al Registro de Citas 
+                    1.Ingresar un nuevo médico
+                    2.Agendar una cita
+                    3.Cancelar cita
+                    4.Mostrar cita
+                    """;
+        
+        JOptionPane.showMessageDialog(null, message);        
+        int opcion = Integer.parseInt(JOptionPane.showInputDialog("ingrese opcion"));
+        int contMedico= 0;
+        
+       // int opcion = Integer.parseInt(JOptionPane.showInputDialog("ingrese opcion");
+        
+        while(opcion>0){
+
+
+            switch(opcion){
+                case 1:
+                    if(contMedico <arrMedicos.length){
+                         String nombre = JOptionPane.showInputDialog("Ingrese el nombre del medico:");
+                         String apellido = JOptionPane.showInputDialog("Ingrese el apellido del medico:");
+                         int especialidad = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la especialidad medico:\n 1.Medicina General \n 2.Cirugía Ambulatoria \n 3. Cirugía Especializada" ));
+                         String almuerzo = JOptionPane.showInputDialog("Ingrese la hora de almuerzo del medico( formato HH:MM):");
+                         
+                         
+
+
+                         Medicos nuevoMedico = new Medicos(nombre,apellido,especialidad,almuerzo);
+                         nuevoMedico.setNombre(nombre);
+                         nuevoMedico.setApellido(apellido);
+                         nuevoMedico.setEspecialidad(especialidad);
+                         nuevoMedico.setAlmuerzo(almuerzo);
+                         LocalTime horaAlmuerzo = nuevoMedico.procesorAlmmuerzo();
+
+                         arrMedicos[contMedico]= nuevoMedico;
+                         contMedico++;
+                         JOptionPane.showMessageDialog(null, "Médico agregado correctamente.");
+
+
+
+                        //Imrpimir info
+
+                         JOptionPane.showMessageDialog(null,"Nombre: " + nuevoMedico.getNombre()+"\n"+
+                         "Apellido: " + nuevoMedico.getApellido()+"\n"+
+                         "Especialidad: " + nuevoMedico.getEspecialidad()+"\n"+
+                         "Almuerzo: " + horaAlmuerzo);
+
+                    }else {
+                        JOptionPane.showMessageDialog(null, "El arreglo está lleno. No se pueden agregar más médicos.");
+                    }
+                    opcion = Integer.parseInt(JOptionPane.showInputDialog("ingrese opcion"));
+                        break;
+                        
+                case 2:
+                    agendarCita(arrMedicos);
+                    opcion = Integer.parseInt(JOptionPane.showInputDialog("ingrese opcion"));
+                    break;
+                case 3:
+                    mostrarCitasMedicoPorDia(arrMedicos);
+                    opcion = Integer.parseInt(JOptionPane.showInputDialog("ingrese opcion"));
+                    break;
+            }
+        } 
+
+    }
+     private static void agendarCita(Medicos[] arrMedicos) {
+        String nombreMedico = JOptionPane.showInputDialog("Ingrese el nombre del médico:");
+
+        // Buscar el médico en el arreglo arrMedicos
+        Medicos medico = null;
+        for (Medicos m : arrMedicos) {
+            if (m != null && m.getNombre().equalsIgnoreCase(nombreMedico)) {
+                medico = m;
+                break;
+            }
+        }
+
+        if (medico == null) {
+            JOptionPane.showMessageDialog(null, "Médico no encontrado. Verifique el nombre ingresado.");
+            return;
+        }
+
+        String nombreCliente = JOptionPane.showInputDialog("Ingrese el nombre del cliente:");
+        String telefonoCliente = JOptionPane.showInputDialog("Ingrese el teléfono del cliente:");
+
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String fechaString = JOptionPane.showInputDialog("Ingrese la fecha de la cita (formato dd/MM/yyyy):");
+        LocalDate fechaCita = LocalDate.parse(fechaString, dateFormatter);
+
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+        String horaString = JOptionPane.showInputDialog("Ingrese la hora de la cita (formato HH:mm):");
+        LocalTime horaCita = LocalTime.parse(horaString, timeFormatter);
+
+        Citas cita = new Citas(medico, new Pacientes(nombreCliente, telefonoCliente, fechaCita,0 ), fechaCita, horaCita);
+        medico.agregarCita(cita);
+    }
+
+    private static void mostrarCitasMedicoPorDia(Medicos[] arrMedicos) {
+        String nombreMedico = JOptionPane.showInputDialog("Ingrese el nombre del médico:");
+
+        // Buscar el médico en el arreglo arrMedicos
+        Medicos medico = null;
+        for (Medicos m : arrMedicos) {
+            if (m != null && m.getNombre().equalsIgnoreCase(nombreMedico)) {
+                medico = m;
+                break;
+            }
+        }
+
+        if (medico == null) {
+            JOptionPane.showMessageDialog(null, "Médico no encontrado. Verifique el nombre ingresado.");
+            return;
+        }
+
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String fechaString = JOptionPane.showInputDialog("Ingrese la fecha para ver las citas (formato dd/MM/yyyy):");
+        LocalDate fechaCita = LocalDate.parse(fechaString, dateFormatter);
+
+        // Implementar la lógica para mostrar las citas del médico en la fecha especificada
+        // ...
+    }
+}
