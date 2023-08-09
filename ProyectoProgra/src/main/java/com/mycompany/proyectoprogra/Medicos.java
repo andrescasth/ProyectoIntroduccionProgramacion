@@ -10,9 +10,9 @@ import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
 /**
  *
- * @author andre
  */
 public class Medicos {
+    
 //Atributos
     private String nombre;
     private  String apellido;
@@ -146,7 +146,7 @@ public class Medicos {
         JOptionPane.showMessageDialog(null, "No hay espacio disponible para agregar la cita.");
     }
      
-     //Verifica si el medicvo ya tiene una cita
+     //Verifica si el medico ya tiene una cita
     public boolean tieneCita(LocalTime hora, LocalDate fecha) {
         for (Citas cita : citas) {
             if (cita != null && cita.getHora().equals(hora) && cita.getFecha().equals(fecha)) {
