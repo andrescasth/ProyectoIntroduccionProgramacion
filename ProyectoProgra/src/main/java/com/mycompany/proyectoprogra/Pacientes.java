@@ -10,15 +10,12 @@ import java.time.LocalTime;
  * @author andre
  */
 public class Pacientes {
-    
-    //Atributos
     private String nombreCliente;
     private String telefonoCliente;
     private LocalDate fecha;
     private int servicio;
     private int duracion;
     
-    //Constructor
     public Pacientes (String nombreCliente, String telefonoCliente, LocalDate fecha, int servicio){
         this.nombreCliente = nombreCliente;
         this.telefonoCliente= telefonoCliente;
