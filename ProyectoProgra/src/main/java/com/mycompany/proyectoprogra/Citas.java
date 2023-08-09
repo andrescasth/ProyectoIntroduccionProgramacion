@@ -7,7 +7,6 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 /**
  *
- * @author andre
  */
 public class Citas {
 
