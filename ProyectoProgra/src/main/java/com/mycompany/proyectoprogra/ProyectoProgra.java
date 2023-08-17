@@ -182,7 +182,7 @@ public class ProyectoProgra {
         // Buscar la primera hora disponible para la cita
         LocalTime horaInicioCita = null;
 
-        for (LocalTime hora = LocalTime.of(8, 0); hora.plusHours(duracionCita).isBefore(LocalTime.of(18, 0)); hora = hora.plusHours(2)) {
+        for (LocalTime hora = LocalTime.of(8, 0); hora.plusHours(duracionCita).isBefore(LocalTime.of(18, 0)); hora = hora.plusHours(servicioCliente)) {
             if (medico.puedeAtenderCita(hora, duracionCita) && !medico.tieneCita(hora, fechaCita)) {
                 horaInicioCita = hora;
                 break;
