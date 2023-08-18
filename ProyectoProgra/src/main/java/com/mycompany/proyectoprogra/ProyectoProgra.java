@@ -21,12 +21,13 @@ public class ProyectoProgra {
         Medicos arrMedicos[] = new Medicos[5];  //Lista de tipo Medicos que acepta hasta 5 médicos
         
         //Mensaje que imprime el Menú
-        String message= """
+       String message= """
                     Bienvenido al Registro de Citas 
                     1.Ingresar un nuevo médico
                     2.Agendar una cita
                     3.Cancelar cita
                     4.Mostrar cita
+                    5.Salir   
                     """;
         
         JOptionPane.showMessageDialog(null, message);      //Imprime el menú  
